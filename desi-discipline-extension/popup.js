@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Update time display
 function updateTimeDisplay() {
     chrome.storage.sync.get(['userData'], (result) => {
-        const userData = result.userData;
+        const userData = result.userData || { productiveTime: 0, distractedTime: 0 };
         const productiveHours = Math.floor(userData.productiveTime / 60);
         const productiveMinutes = userData.productiveTime % 60;
         const distractedHours = Math.floor(userData.distractedTime / 60);

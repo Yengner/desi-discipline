@@ -51,8 +51,6 @@ function checkWebsite(url) {
 
     // Check if it's a good site
     if (goodSites.some(site => domain.includes(site))) {
-        console.log("2.5");
-
         showAlert('good', domain);
         return;
     }
@@ -60,13 +58,18 @@ function checkWebsite(url) {
     // Check if it's a bad site
     if (badSites.some(site => domain.includes(site))) {
         showAlert('bad', domain);
+        // Send message to content script to show the red button
+        chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            if (tabs[0]) {
+                chrome.tabs.sendMessage(tabs[0].id, { action: 'showBadWebsiteWarning' });
+            }
+        });
         return;
     }
 }
 
 function showAlert(status, domain) {
     // Check if the popup is open before sending the message
-    console.log("trefakhsdfsh");
     chrome.runtime.sendMessage({ action: "showAlert", status: status, domain: domain})
         .catch(error => {
             // Ignore the error if the popup is not open (Receiving end does not exist)

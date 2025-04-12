@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { registerUser } from "@/lib/server.js";
+
 export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,11 +14,7 @@ export default function SignUp() {
     setMessage("");
 
     try {
-      const res = await fetch("/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
+      const res = await registerUser(email, password);
 
       if (res.ok) {
         setMessage("Registration successful!");

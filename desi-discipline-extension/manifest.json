@@ -1,0 +1,19 @@
+{
+  "manifest_version": 3,
+  "name": "Desi Discipline",
+  "version": "1.0",
+  "description": "A focus app that helps students stay productive by monitoring website usage",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "activeTab"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  }
+} 

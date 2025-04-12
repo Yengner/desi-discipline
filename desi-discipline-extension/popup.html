@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Desi Discipline</title>
+    <style>
+        body {
+            width: 300px;
+            padding: 10px;
+            font-family: Arial, sans-serif;
+        }
+        .status {
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .good {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .bad {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .maybe {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .stats {
+            margin-top: 15px;
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+        button {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #statusButton {
+            font-size: 18px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+        #statusButton.good {
+            background-color: #28a745;
+        }
+        #statusButton.bad {
+            background-color: #dc3545;
+        }
+        #statusButton.maybe {
+            background-color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <h2>Desi Discipline</h2>
+    <button id="statusButton" class="maybe">Checking Website Status...</button>
+    <div id="statusDisplay" class="status"></div>
+    <button id="addGoodSite">Add Good Site</button>
+    <button id="addBadSite">Add Bad Site</button>
+    <button id="viewStats">View Statistics</button>
+    <div id="statsDisplay" class="stats">
+        <p>Productive Time: <span id="productiveTime">0h 0m</span></p>
+        <p>Distracted Time: <span id="distractedTime">0h 0mm</span></p>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html> 

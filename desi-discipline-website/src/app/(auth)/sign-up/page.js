@@ -1,6 +1,6 @@
-import SignUpPage from "@/components/SignUpForm";
+import AuthForm from "@/components/AuthForm";
 
 export default async function SignUp(){
-  return <SignUpPage />
+  return <AuthForm type='signup'/>
 }
 

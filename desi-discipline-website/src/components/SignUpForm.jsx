@@ -1,10 +1,9 @@
 "use client";
 
+import { registerUser } from "@/lib/server";
 import { useState } from "react";
 
-import { registerUser } from "@/lib/server.js";
-
-export default function SignUp() {
+export default function SignUpPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -14,15 +13,14 @@ export default function SignUp() {
     setMessage("");
 
     try {
-      const res = await registerUser(email, password);
-
-      if (res.ok) {
+        const { errorMessage } = await registerUser(email, password);
+        if (!errorMessage) {
         setMessage("Registration successful!");
         setEmail("");
         setPassword("");
       } else {
-        const data = await res.json();
-        setMessage(data.message || "Something went wrong.");
+        // const data = await res.json();
+        setMessage(errorMessage || "Something went wrong.");
       }
     } catch (err) {
       setMessage("Error connecting to the server.");

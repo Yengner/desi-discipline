@@ -44,28 +44,45 @@ export async function registerUser(email, password) {
       //   'INSERT INTO "User" ("firebaseid", "email") VALUES ($1, $2)',
       //   [firebaseId, email]
       // );
-  
+      return null
     } catch (error) {
-      res.status(500).json({ message: 'Registration failed', error: error.message });
+      return { errorMessage: error.message };
     }
   });
   
-  const isAuthenticated = (req, res, next) => {
-    if (req.session.userId) {
-      next();
-    } else {
-      res.status(401).json({ message: 'Unauthorized' });
-    }
-  };
+  // const isAuthenticated = (req, res, next) => {
+  //   if (req.session.userId) {
+  //     next();
+  //   } else {
+  //     res.status(401).json({ message: 'Unauthorized' });
+  //   }
+  // };
   
-  app.get('/user', isAuthenticated, (req, res) => {
-    res.json({ userId: req.session.userId });
-  });
+  // app.get('/user', isAuthenticated, (req, res) => {
+  //   res.json({ userId: req.session.userId });
+  // });
   
-  app.listen(5000, () => {
-    console.log('Server is running on port 5000');
-  });
+  // app.listen(5000, () => {
+  //   console.log('Server is running on port 5000');
+  // });
 
-  return { errorMessage: null }
 
 }  
+
+
+export async function handleLogin(email, password) {
+
+  try {
+      const supabase = await createSupabaseClient();
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+      if (error) {
+          throw error;
+      }
+
+      return { errorMessage: null }
+
+  } catch (error) {
+      return { errorMessage: getErrorMessage(error) }
+  }
+}

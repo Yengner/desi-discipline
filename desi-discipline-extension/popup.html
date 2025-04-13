@@ -69,6 +69,13 @@
             transition: all 0.3s ease;
         }
 
+        #studyToggleBtn {
+            font-size: 18px;
+            padding: 15px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
         #statusButton.good {
             background-color: #28a745;
         }
@@ -88,11 +95,12 @@
       <img src="icon.png" alt="Icon" style="width: 40px; height: auto; margin-right: 10px;">
       <span style="font-weight: bold; font-size: 20px;">Desi Discipline</span>
     </div>
+    <button id="studyToggleBtn" class="good" style="font-family: 'Pixelify Sans', sans-serif;">Start Studying</button>
     <button id="statusButton" class="maybe" style="font-family: 'Pixelify Sans', sans-serif;">Checking Website Status...</button>
     <button id="addGoodSite" style="font-family: 'Pixelify Sans', sans-serif; font-size: 16px;">Add Good Site</button>
     <button id="addBadSite" style="font-family: 'Pixelify Sans', sans-serif; font-size: 16px;">Add Bad Site</button>
-    <button id="timerStartStop" style="font-family: 'Pixelify Sans', sans-serif; font-size: 16px;">Timer</button>
-    
+
+
     <div id="statsDisplay" class="stats">
       <p>Productive Time: <span id="productiveTime">0h 0m</span></p>
       <p>Distracted Time: <span id="distractedTime">0h 0mm</span></p>

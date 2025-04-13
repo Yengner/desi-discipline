@@ -1,5 +1,26 @@
+let isStudying = false;
+let studyStartTime = null;
+let studyInterval = null;
+
 document.addEventListener('DOMContentLoaded', () => {
-    updateTimeDisplay();
+      // ✅ Create timer display element under study button
+    const studyBtn = document.getElementById('studyToggleBtn');
+    const studyTimerDisplay = document.createElement('div');
+    studyTimerDisplay.id = 'studyTimer';
+    studyTimerDisplay.style.textAlign = 'center';
+    studyTimerDisplay.style.marginTop = '5px';
+    studyBtn.insertAdjacentElement('afterend', studyTimerDisplay);
+
+    // ✅ Add event listener to start/stop studying
+    studyBtn.addEventListener('click', () => {
+        if (!isStudying) {
+        startStudying();
+        } else {
+        stopStudying();
+        }
+    });
+    ;
+    // updateTimeDisplay();
     
     // Add event listeners for buttons
     document.getElementById('addGoodSite').addEventListener('click', () => {
@@ -116,3 +137,65 @@ function viewStatistics() {
             Productivity Rate: ${productivityPercentage}%`);
     });
 } 
+
+function startStudying() {
+    isStudying = true;
+    studyStartTime = new Date();
+    const studyBtn = document.getElementById('studyToggleBtn');
+    studyBtn.textContent = 'Stop Studying';
+    studyBtn.classList.remove('good');
+    studyBtn.classList.add('bad');
+  
+    studyInterval = setInterval(() => {
+      const elapsed = Math.floor((new Date() - studyStartTime) / 1000);
+      const minutes = Math.floor(elapsed / 60);
+      const seconds = elapsed % 60;
+      document.getElementById('studyTimer').textContent = `⏱️ Studying for ${minutes}m ${seconds}s`;
+    }, 1000);
+  }
+  
+  async function stopStudying() {
+    isStudying = false;
+    clearInterval(studyInterval);
+  
+    const studyBtn = document.getElementById('studyToggleBtn');
+    studyBtn.textContent = 'Start Studying';
+    studyBtn.classList.remove('bad');
+    studyBtn.classList.add('good');
+    document.getElementById('studyTimer').textContent = '';
+  
+    const endTime = new Date();
+    const totalSeconds = Math.floor((endTime - studyStartTime) / 1000);
+  
+    const { authToken } = await new Promise(resolve => {
+      chrome.storage.local.get(['authToken'], resolve);
+    });
+  
+    if (!authToken) {
+      alert("You're not logged in.");
+      return;
+    }
+  
+    const response = await fetch("https://desi-discipline.vercel.app/api/log-focus-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authToken}`
+      },
+      body: JSON.stringify({
+        start_time: studyStartTime.toISOString(),
+        end_time: endTime.toISOString(),
+        total_seconds: totalSeconds
+      })
+    });
+  
+    const result = await response.json();
+    if (result.success) {
+      alert(`✅ Study session logged: ${Math.floor(totalSeconds / 60)}m ${totalSeconds % 60}s`);
+    } else {
+      console.error(result.error);
+      alert("❌ Failed to log session.");
+    }
+  
+    studyStartTime = null;
+  }

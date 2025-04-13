@@ -23,11 +23,7 @@ export default function SignUpPage() {
       if (errorMessage) {
         toast.error(errorMessage);
       } else {
-        if (window.chrome && chrome.runtime) {
-          chrome.runtime.sendMessage("nlnjmjjcbokfnpapeoofkflkjgndkafc", { token: access_token, refresh_token: refresh_token }, response => {
-            console.log("Extension received token");
-          }); 
-        }
+
         toast.success("Signed Up!");
         router.push("/dashboard");
       }

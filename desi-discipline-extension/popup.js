@@ -72,19 +72,35 @@ function updateStatusDisplay(status) {
 
 // Add website to list
 function addWebsite(type) {
-    const url = prompt(`Enter the website domain to add to ${type} list:`);
-    if (url) {
-        chrome.storage.sync.get(['userData'], (result) => {
-            const userData = result.userData;
-            if (type === 'good') {
-                userData.goodSites.push(url);
-            } else {
-                userData.badSites.push(url);
-            }
-            chrome.storage.sync.set({userData});
-            alert(`Added ${url} to ${type} websites list`);
-        });
-    }
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        const url = tabs[0].url;
+        console.log("Current URL:", url);
+        if (url) {
+            const endpoint = type === 'good' ? 'https://your-backend.com/api/good' : 'https://your-backend.com/api/bad';
+            fetch(endpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ url: url })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+
+      });
+
 }
 
 // View statistics

@@ -3,6 +3,7 @@ import { supabase, setAuthSession } from './supabaseClient.js';
 // Hardcoded lists of good and bad websites
 const apiKey = "AIzaSyDh3NUB6h470ctpwgT9bT57yeReQuigio8";
 
+//Get api to get good sites and set
 const goodSites = [
     'canvas.com',
     'calendar.google.com',
@@ -16,6 +17,7 @@ const goodSites = [
     'codecademy.com'
 ];
 
+//Get api to get bad sites
 const badSites = [
     'instagram.com',
     'netflix.com',

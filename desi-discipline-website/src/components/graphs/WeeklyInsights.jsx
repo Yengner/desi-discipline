@@ -34,7 +34,7 @@ export default function WeeklyInsight({ stats }) {
     <div className="insight-container">
       <div className="insight-title">Weekly Insight</div>
       <div className="insight-content">
-        <ul style={{ listStyle: "none", padding: "20px", margin: 0 }}>
+        <ul style={{ listStyle: "none", padding: "20px", margin: 0, color: "#721c24" }}>
           <li>📅 Most productive week: <b>{mostProductive.week_start_date}</b></li>
           <li>😴 Least productive week: <b>{leastProductive.week_start_date}</b></li>
           <li>📈 Average study time: <b>{Math.round(avgStudyTime)} mins</b></li>

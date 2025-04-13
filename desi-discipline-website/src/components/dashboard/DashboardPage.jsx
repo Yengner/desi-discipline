@@ -4,9 +4,10 @@ import React from "react";
 import LogoutButton from "../LogoutButton";
 import "./Dashboard.css";
 import StudyChart from "../graphs/StudyChart";
+import WeeklyInsight from "../graphs/WeeklyInsights";
 
 
-export default function DashboardPage({stats}) {
+export default function DashboardPage({stats, weekly_data}) {
   return (
     <div className="dashboard">
       {/* Header with logo and title */}
@@ -42,13 +43,10 @@ export default function DashboardPage({stats}) {
         <div className="chart-insight-container">
           {/* Bar chart */}
           <div className="chart-container">
-      <StudyChart stats={stats}/>
+            <StudyChart stats={stats}/>
           </div>
           {/* Weekly insight */}
-          <div className="insight-container">
-            <div className="insight-title">Weekly Insight</div>
-            <div className="insight-content"></div>
-          </div>
+          <WeeklyInsight stats={weekly_data}/>
         </div>
       </div>
     </div>

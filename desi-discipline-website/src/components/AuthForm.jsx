@@ -24,7 +24,7 @@ export default function AuthForm({ type }) {
                     toast.error(errorMessage);
                 } else {
                     if (window.chrome && chrome.runtime) {
-                        chrome.runtime.sendMessage("your-extension-id", { token: "JWT_TOKEN_HERE" }, response => {
+                        chrome.runtime.sendMessage("cjadjjbeocchjlobphenhcomlipknlap", { token: access_token }, response => {
                           console.log("Extension received token");
                         });
                       }

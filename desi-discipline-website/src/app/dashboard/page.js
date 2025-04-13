@@ -1,5 +1,3 @@
-"use server";
-
 import DashboardPage from '@/components/dashboard/DashboardPage';
 import { getUserDailyStats } from '@/lib/getUserDailyStats';
 

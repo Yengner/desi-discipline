@@ -1,8 +1,11 @@
 "use client";
+
 import React from "react";
 import LogoutButton from "../LogoutButton";
 import "./Dashboard.css";
 import StudyChart from "../graphs/StudyChart";
+
+
 export default function DashboardPage({stats}) {
   return (
     <div className="dashboard">

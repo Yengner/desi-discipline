@@ -44,10 +44,12 @@ export default function SignUpPage() {
           <div className="desi-discipline-sign-up" style={{ fontFamily: "'Pixelify Sans', sans-serif" }}>Desi Discipline</div>
 
           <div className="email">Email:</div>
+
           <input
             className="rectangle-3"
             type="email"
             name="email"
+            placeholder="Enter email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -58,6 +60,7 @@ export default function SignUpPage() {
             className="rectangle-4"
             type="text"
             name="username"
+            placeholder="Enter username"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
             required
@@ -68,6 +71,7 @@ export default function SignUpPage() {
             className="rectangle-7"
             type="password"
             name="password"
+            placeholder="Enter password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

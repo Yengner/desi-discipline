@@ -1,54 +1,62 @@
 "use client";
-
 import React from "react";
-import "./Dashboard.css";
 import LogoutButton from "../LogoutButton";
-
+import "./Dashboard.css";
 export default function DashboardPage() {
-    
   return (
     <div className="dashboard">
-      <div className="welcome-rocky">Welcome Rocky!</div>
-      <div className="logout-wrapper">
-        <LogoutButton />
+      {/* Header with logo and title */}
+      <div className="header">
+        <div className="logo-title">
+          <img className="logo" src="/icon-10.png" alt="Desi Discipline logo" />
+          <div className="title">Desi Discipline</div>
+        </div>
+        <div className="logout-wrapper">
+          <LogoutButton />
+        </div>
       </div>
-      <div className="frame-3"></div>
-      <div className="rectangle-7"></div>
-      <div className="desi-discipline">Desi Discipline</div>
-
-      <img className="icon-1" src="/icon-10.png" alt="icon" />
-      <img className="image-1" src="/image-10.png" alt="avatar" />
-      <img className="rectangle-6" src="/rectangle-60.svg" alt="bg 1" />
-      <img className="rectangle-2" src="/rectangle-20.svg" alt="bg 2" />
-
-      <div className="weekly-insight">Weekly Insight</div>
-      <img
-        className="pngtree-fire-icon-symbol-simple-design-blaze-transparent-flaming-vector-png-image-46963576-removebg-preview-1"
-        src="/pngtree-fire-icon-symbol-simple-design-blaze-transparent-flaming-vector-png-image-46963576-removebg-preview-10.png"
-        alt="streak fire"
-      />
-
-      <div className="_69-day-streak">69 Day Streak!</div>
-      <div className="each-day-you-study-one-aunty-becomes-less-nosey">
-        Each day you study, one aunty becomes less nosey!
+      {/* Main content */}
+      <div className="welcome-message">Welcome Rocky!</div>
+      {/* Dashboard card with border */}
+      <div className="dashboard-card">
+        {/* Streak info */}
+        <div className="streak-container">
+          <div className="streak-icon">
+            <img
+              src="/pngtree-fire-icon-symbol-simple-design-blaze-transparent-flaming-vector-png-image-46963576-removebg-preview-10.png"
+              alt="streak fire"
+            />
+          </div>
+          <div className="streak-info">
+            <div className="streak-title">69 Day Streak!</div>
+            <div className="streak-message">
+              Each day you study, one aunty becomes less nosey!
+            </div>
+          </div>
+        </div>
+        {/* Chart and insights */}
+        <div className="chart-insight-container">
+          {/* Bar chart */}
+          <div className="chart-container">
+            <div className="y-axis"></div>
+            <div className="bars">
+              <div className="bar bar-1"></div>
+              <div className="bar bar-2"></div>
+              <div className="bar bar-3"></div>
+              <div className="bar bar-4"></div>
+              <div className="bar bar-5"></div>
+              <div className="bar bar-6"></div>
+              <div className="bar bar-7"></div>
+            </div>
+            <div className="x-axis"></div>
+          </div>
+          {/* Weekly insight */}
+          <div className="insight-container">
+            <div className="insight-title">Weekly Insight</div>
+            <div className="insight-content"></div>
+          </div>
+        </div>
       </div>
-
-      <div className="line-3"></div>
-
-      <div className="rectangle-8"></div>
-      <div className="rectangle-9"></div>
-      <div className="rectangle-10"></div>
-      <div className="rectangle-11"></div>
-      <div className="rectangle-12"></div>
-      <div className="rectangle-13"></div>
-      <div className="rectangle-14"></div>
-
-      <div className="line-4"></div>
-
-      <img className="polygon-1" src="/polygon-10.svg" alt="arrow1" />
-      <img className="polygon-2" src="/polygon-20.svg" alt="arrow2" />
-
-      <div className="rectangle-16"></div>
     </div>
   );
 }

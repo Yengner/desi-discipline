@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { handleSignOut } from '@/lib/user.actions';
 
-const LogoutButton = ({ isExpanded }) => {
+const LogoutButton = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -15,30 +15,31 @@ const LogoutButton = ({ isExpanded }) => {
     const { errorMessage } = await handleSignOut();
 
     if (errorMessage) {
-      toast.error(errorMessage)
-
+      toast.error(errorMessage);
     } else {
-      router.push('/login'); // Redirect after logout
-      toast.success("Signed Out!")
+      router.push('/login');
+      toast.success("Signed Out!");
     }
 
     setLoading(false);
   };
 
   return (
-    <button
+    <img
+      src="/image-10.png"
+      alt="Logout"
       onClick={handleLogout}
-      disabled={loading}
-      className="flex items-center w-full px-4 py-3 rounded-lg text-gray-700 hover:bg-red-200 transition-colors"
-    >
-      <span
-        className={`ml-4 transition-opacity duration-200 ${isExpanded ? 'opacity-100' : 'opacity-0'
-          }`}
-      >
-        {loading ? 'Logging Out...' : 'Logout'}
-      </span>
-    </button>
+      className="logout-image-button"
+      style={{
+        width: '40px',
+        height: '40px',
+        cursor: loading ? 'not-allowed' : 'pointer',
+        opacity: loading ? 0.5 : 1,
+        transition: 'transform 0.2s ease',
+      }}
+    />
   );
 };
 
 export default LogoutButton;
+

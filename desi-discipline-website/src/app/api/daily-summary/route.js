@@ -18,19 +18,23 @@ export async function GET(req) {
     { global: { headers: { Authorization: `Bearer ${token}` } } }
   );
 
-  const today = new Date().toISOString().split("T")[0]; // e.g., "2025-04-13"
+  const today = new Date().toISOString().split("T")[0];
+
+  const { data: userData, error: authError } = await client.auth.getUser(); // ✅ fix here
+  if (authError || !userData?.user?.id) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const userId = userData.user.id;
 
   const { data, error } = await client
     .from("daily_stats")
     .select("total_study_time")
+    .eq("user_id", userId)
     .eq("date", today)
-    .limit(1); // safer than .single()
+    .limit(1);
 
-  if (error) {
-    console.error(error);
-    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
-  }
-
+    
   return NextResponse.json({
     productive: data?.[0]?.total_study_time ?? 0,
   });

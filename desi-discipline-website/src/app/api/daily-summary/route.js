@@ -18,13 +18,13 @@ export async function GET(req) {
     { global: { headers: { Authorization: `Bearer ${token}` } } }
   );
 
-  const today = new Date().toISOString().split("T")[0]; // YYYY-MM-DD
+  const today = new Date().toISOString().split("T")[0]; // e.g., "2025-04-13"
 
   const { data, error } = await client
     .from("daily_stats")
     .select("total_study_time")
     .eq("date", today)
-    .single();
+    .limit(1); // safer than .single()
 
   if (error) {
     console.error(error);
@@ -32,6 +32,6 @@ export async function GET(req) {
   }
 
   return NextResponse.json({
-    productive: data?.total_study_time ?? 0,
+    productive: data?.[0]?.total_study_time ?? 0,
   });
 }

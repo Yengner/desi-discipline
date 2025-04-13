@@ -35,7 +35,7 @@ export default function DashboardPage({username, stats, weekly_data}) {
           <div className="streak-info">
             <div className="streak-title">0 Day Streak!</div>
             <div className="streak-message">
-              Each day you study, one aunty becomes less nosey!
+              Each day you study, Mummy's blood pressure drops a little!
             </div>
           </div>
         </div>

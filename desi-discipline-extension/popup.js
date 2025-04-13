@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     ;
-    // updateTimeDisplay();
+    updateTimeDisplay();
     
     // Add event listeners for buttons
     document.getElementById('addGoodSite').addEventListener('click', () => {
@@ -111,11 +111,13 @@ async function updateTimeDisplay() {
         return;
       }
   
-      const { productive } = data;
+      const totalSeconds = data.productive ?? 0;
+
+      const pH = Math.floor(totalSeconds / 3600);
+      const pM = Math.floor((totalSeconds % 3600) / 60);
+      const pS = totalSeconds % 60;
   
-      const [pH, pM] = [Math.floor(productive / 60), productive % 60];
-  
-      document.getElementById("productiveTime").textContent = `${pH}h ${pM}m`;
+      document.getElementById("productiveTime").textContent = `${pH}h ${pM}m ${pS}s`;
     } catch (err) {
       console.error("Error fetching stats:", err);
     }

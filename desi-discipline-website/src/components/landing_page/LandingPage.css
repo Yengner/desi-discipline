@@ -1,0 +1,107 @@
+.desktop-1 {
+  background: #feb567;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Pixelify Sans", sans-serif;
+}
+
+.content-container {
+  background: #fff5ee;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  max-width: 500px;
+}
+
+.desi-discipline {
+  font-size: 2.5rem;
+  color: #d8063e;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.decorative-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-bottom: 1.5rem;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form label {
+  font-size: 1.3rem;
+  color: #d8063e;
+  margin-bottom: 0.5rem;
+}
+
+.login-form input {
+  background: #ff9496;
+  border-radius: 24px;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  outline: none;
+  color: #171717;
+}
+
+#loginBtn {
+  background: #ff9496;
+  color: #d8063e;
+  border-radius: 24px;
+  padding: 0.75rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  margin-top: 0.5rem;
+}
+
+#loginBtn:hover {
+  background-color: #333;
+  color: white;
+  transform: scale(1.05);
+}
+
+#loginBtn:active {
+  transform: scale(0.95);
+}
+
+.signup-text {
+  margin-top: 1.5rem;
+  font-size: 1.1rem;
+  color: #d8063e;
+  text-align: center;
+}
+
+.signup-text a {
+  text-decoration: underline;
+}
+
+.signup-text .mummy {
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 500px) {
+  .desi-discipline {
+    font-size: 2rem;
+  }
+
+  .content-container {
+    padding: 1rem;
+  }
+}

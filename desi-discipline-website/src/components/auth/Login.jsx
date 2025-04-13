@@ -71,7 +71,7 @@ export default function LoginPage() {
         </form>
 
         <div className="signup-text">
-          New Here? <Link href="/signuppath">Sign Up</Link>
+          New Here? <Link href="/sign-up">Sign Up</Link>
           <div className="mummy">(before I call your mummy)</div>
         </div>
       </div>

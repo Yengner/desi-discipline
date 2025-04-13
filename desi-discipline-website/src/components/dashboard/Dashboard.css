@@ -113,7 +113,8 @@
   background: #fde3c5;
   padding: 20px;
   border-radius: 16px;
-  height: 300px;
+  height: 350px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .insight-container {
@@ -226,6 +227,7 @@
   background-color: #ff9b9b;
   border-radius: 20px;
   height: 250px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive adjustments */

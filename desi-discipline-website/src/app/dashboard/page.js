@@ -1,5 +1,5 @@
 import DashboardPage from '@/components/dashboard/DashboardPage';
-import { getUserDailyStats } from '/Users/yb/Desktop/desi/desi-discipline/desi-discipline-website/src/lib/getUserDailyStats.js';
+import { getUserDailyStats } from '@/lib/getUserDailyStats';
 
 const data = await getUserDailyStats();
 

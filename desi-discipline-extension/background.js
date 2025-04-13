@@ -92,11 +92,11 @@ function testApiCall() {
         return;
       }
   
-      fetch("https://your-app.vercel.app/api/extensions", {
+      fetch("https://desi-discipline.vercel.app/api/extension", {
         method: "GET", // or POST if needed
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+        //   "Authorization": `Bearer ${token}`
         }
       })
         .then(res => res.json())

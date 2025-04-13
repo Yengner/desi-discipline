@@ -35,6 +35,7 @@ setInterval(() => {
         else{
             if(lastCheckedUrl)
                 {
+                    testApiCall()
                     checkWebsite(lastCheckedUrl);
                 }
             }

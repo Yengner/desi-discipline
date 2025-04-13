@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { createClient } from '@supabase/supabase-js';
 
 const supabaseAdmin = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY);
 
@@ -7,7 +7,7 @@ export async function POST(req) {
   const { domain, override_type } = await req.json();
 
   if (!token || !domain || !override_type) {
-    return NextResponse.json({ success: false, error: 'Missing fields' }, { status: 400 });
+    return { success: false, error: 'Missing fields' }, { status: 400 }
   }
 
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {

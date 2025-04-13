@@ -1,3 +1,5 @@
+"use server";
+
 import LogoutButton from '@/components/LogoutButton';
 import { getLoggedInUser } from '@/lib/user.actions';
 import { createSupabaseClient } from '@/utils/supabase/clients/server';
@@ -9,13 +11,13 @@ const userId = loggedIn?.id;
 
 console.log(userId || "No user logged in");
 
-const { data, error } = await supabase
-  .from("users")
-  .select("email")
-  .eq("id", userId)
-  .single();
+// const { data, error } = await supabase
+//   .from("users")
+//   .select("email")
+//   .eq("id", userId)
+//   .single();
 
-console.log(data);
+// console.log(data);
 
 export default async function WE() {
   return (

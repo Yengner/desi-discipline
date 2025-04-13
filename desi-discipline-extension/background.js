@@ -32,6 +32,13 @@ const apiKey = "AIzaSyDh3NUB6h470ctpwgT9bT57yeReQuigio8";
 // ];
 
 let lastCheckedUrl = '';
+let isSessionInitialized = false;
+
+
+// Fetch user focus sessions
+chrome.runtime.onStartup.addListener(() => {
+    fetchUserFocusSessions(); 
+  });
 
 // setInterval(() => {
 //     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
@@ -56,14 +63,13 @@ setInterval(() => {
         else{
             if(lastCheckedUrl)
                 {
-                    testApiCall()
                     checkWebsite(lastCheckedUrl);
                     await fetchUserFocusSessions();
                     
                 }
             }
     });
-}, 1000);
+}, 2000);
 
 // Check when a tab is activated
 chrome.tabs.onActivated.addListener(activeInfo => {
@@ -127,8 +133,8 @@ function checkWebsite(url) {
         // }
 
         console.log("🌐 Site not in list – treating as ALLOWED:", domain);
-        showAlert("good", domain);
-        
+        showAlert('good', domain);
+
     } catch (err) {
         console.error('Error in checkWebsite:', err);
     }
@@ -190,37 +196,6 @@ function extractTextFromHTML(html) {
 }
 
 // background.js
-
-// Function to retrieve stored token and call your API endpoint.
-function testApiCall() {
-    chrome.storage.sync.get("authToken", (data) => {
-      const token = data.authToken;
-      if (!token) {
-        console.error("No auth token found. Please log in first.");
-        return;
-      }
-  
-      fetch("https://desi-discipline.vercel.app/api/extension", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
-        }
-      })
-        .then(res => res.json())
-        .then(apiData => {
-          console.log("API response from /api/extension:", apiData);
-        })
-        .catch(err => {
-          console.error("Error calling API:", err);
-        });
-    });
-  }
-  
-  // Optionally, test the API call when the extension icon is clicked.
-  chrome.action.onClicked.addListener(() => {
-    testApiCall();
-  });
   
   // Listen for messages from the website to receive the auth token.
   chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
@@ -235,7 +210,10 @@ function testApiCall() {
     }
   });
 
+  // Fetch user focus sessions
   async function fetchUserFocusSessions() {
+    if (isSessionInitialized) return; // prevent re-auth
+
     chrome.storage.local.get(["authToken", "refreshToken"], async (data) => {
       const token = data.authToken;
       const refreshToken = data.refreshToken;
@@ -245,14 +223,12 @@ function testApiCall() {
         return;
       }
   
-      // ✅ Set session (this mutates the shared supabase instance)
       const session = await setAuthSession(token, refreshToken);
       if (!session) {
         console.error("Failed to set session.");
         return;
       }
   
-      // ✅ Reuse shared `supabase` instance (not from setAuthSession)
       const { data: userData, error: userError } = await supabase.auth.getUser();
       if (userError || !userData?.user) {
         console.error("Failed to get authenticated user:", userError);
@@ -263,19 +239,21 @@ function testApiCall() {
       console.log("Authenticated user ID:", userId);
 
         // Fetch the site lists
-      await fetchSiteLists(userId);
-  
-      const { data: sessions, error } = await supabase
+        
+        const { data: sessions, error } = await supabase
         .from("users")
         .select("*")
-        .eq("id", userId); // assuming 'user_id' is the foreign key
-  
-      if (error) {
-        console.error("Error fetching focus sessions:", error);
-        return;
-      }
-  
-      console.log("Focus sessions for user", userId, ":", sessions);
+        .eq("id", userId); 
+        
+        if (error) {
+            console.error("Error fetching focus sessions:", error);
+            return;
+        }
+        console.log("Focus sessions for user", userId, ":", sessions);
+        isSessionInitialized = true; 
+
+        
+        await fetchSiteLists(userId);
     });
   }
 
@@ -291,7 +269,8 @@ function testApiCall() {
   
     const { data: overrides, error: overrideError } = await supabase
       .from("user_site_settings")
-      .select("site_id, override_type");
+      .select("site_id, override_type")
+      .eq("user_id", userId);
   
     if (siteError) {
       console.error("Error loading global site list:", siteError);
@@ -302,24 +281,29 @@ function testApiCall() {
       console.error("Error loading user overrides:", overrideError);
       return;
     }
+    console.log("Global sites from DB:", globalSites);
+    console.log("User overrides from DB:", overrides);
   
     // Map overrides for quick lookup
     const overrideMap = {};
-    overrides.forEach((o) => {
+    overrides.forEach(o => {
       overrideMap[o.site_id] = o.override_type;
     });
   
-    // Merge global list with overrides
+    // ✅ Clear lists first
     goodSites = [];
     badSites = [];
   
-    for (const site of globalSites) {
-      const finalType = overrideMap[site.site_id] || site.default_type;
-      if (finalType === "allowed") goodSites.push(site.domain);
-      else if (finalType === "distraction") badSites.push(site.domain);
-    }
+    // ✅ Loop through and push into correct arrays
+    globalSites.forEach(site => {
+      const finalType = overrideMap[site.site_id] || site.category;
+      if (finalType === 'allowed') {
+        goodSites.push(site.domain);
+      } else if (finalType === 'distraction') {
+        badSites.push(site.domain);
+      }
+    });
   
-    console.log("✅ goodSites from DB:", goodSites);
-    console.log("🚫 badSites from DB:", badSites);
+    console.log("✅ Good Sites:", goodSites);
+    console.log("🚫 Bad Sites:", badSites);
   }
-  

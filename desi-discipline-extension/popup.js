@@ -72,33 +72,33 @@ function updateStatusDisplay(status) {
 
 // Add website to list
 function addWebsite(type) {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, async function (tabs) {
         const url = tabs[0].url;
-        console.log("Current URL:", url);
-        if (url) {
-            const endpoint = type === 'good' ? 'https://your-backend.com/api/good' : 'https://your-backend.com/api/bad';
-            fetch(endpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ url: url })
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Success:', data);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
+        const domain = new URL(url).hostname;
+      
+        const { authToken } = await new Promise(resolve => {
+          chrome.storage.local.get(["authToken"], resolve);
+        });
+      
+        const response = await fetch("https://desi-discipline.vercel.app/api/add-site-override", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`
+          },
+          body: JSON.stringify({
+            domain,
+            override_type: type === 'good' ? 'allowed' : 'distraction'
+          })
+        });
+      
+        const result = await response.json();
+        if (result.success) {
+          alert("✅ Site saved!");
+        } else {
+          console.error("❌ Failed to save:", result.error);
+          alert("❌ Error saving site.");
         }
-
-
       });
 
 }

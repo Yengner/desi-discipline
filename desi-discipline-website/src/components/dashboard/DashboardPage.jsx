@@ -1,30 +1,6 @@
 "use client";
 import React from "react";
 import LogoutButton from "../LogoutButton";
-<<<<<<< HEAD
-import StudyChart from "../graphs/StudyChart";
-
-export default function DashboardPage({stats}) {
-    
-  return (
-    <div className="">
-      <div className="welcome-rocky">Welcome Rocky!</div>
-      <div className="logout-wrapper">
-        <LogoutButton />
-      </div>
-
-      <div className="_69-day-streak">69 Day Streak!</div>
-      <div className="each-day-you-study-one-aunty-becomes-less-nosey">
-        Each day you study, one aunty becomes less nosey!
-      </div>
-
-      <div className="line-3"></div>
-
-      <StudyChart stats={stats} />
-
-      <div className="line-4"></div>
-
-=======
 import "./Dashboard.css";
 export default function DashboardPage() {
   return (
@@ -81,7 +57,6 @@ export default function DashboardPage() {
           </div>
         </div>
       </div>
->>>>>>> c4439224ff4ccd00fdaeeafbf09c036057a92109
     </div>
   );
 }

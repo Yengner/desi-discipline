@@ -25,7 +25,7 @@ export async function GET(req) {
     .select("total_study_time")
     .eq("date", today)
     .single();
-    
+
   if (error) {
     console.error(error);
     return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
@@ -33,6 +33,5 @@ export async function GET(req) {
 
   return NextResponse.json({
     productive: data?.total_study_time ?? 0,
-    distracted: data?.total_distraction_time ?? 0,
   });
 }

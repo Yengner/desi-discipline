@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
 .desktop-1 {
   background: #feb567;
   width: 100vw;
@@ -15,7 +16,7 @@
   background: #ffa362;
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -67,7 +68,7 @@
   font-size: 1.2rem;
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   margin-top: 0.5rem;
 }
 
@@ -98,9 +99,10 @@
   font-size: 0.9rem;
   margin-top: 0.25rem;
 }
+
 .main-btn {
-  background: linear-gradient(135deg, #ff1616, #ff8e6b);
-  color: rgb(0, 0, 0);
+  background: #d8063e;
+  color: white;
   font-family: "Pixelify Sans", sans-serif;
   font-weight: bold;
   font-size: 1.1rem;

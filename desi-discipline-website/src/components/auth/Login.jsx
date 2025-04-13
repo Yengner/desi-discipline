@@ -42,7 +42,7 @@ export default function LoginPage() {
     <div className="desktop-1">
       <div className="content-container">
         <h1 className="desi-discipline">Desi Discipline</h1>
-        <img className="decorative-image" src="/gifaunty.gif" alt="Decorative" />
+        <img className="decorative-image" src="https://piskel-imgstore-b.appspot.com/img/dadd90cf-1872-11f0-8f15-373cf57b0682.gif" alt="Decorative" />
 
         <form className="login-form" onSubmit={handleSubmit}>
           <label htmlFor="email">Email:</label>

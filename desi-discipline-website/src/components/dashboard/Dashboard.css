@@ -102,7 +102,8 @@
 /* Chart and insights */
 .chart-insight-container {
   display: grid;
-  grid-template-columns: 3fr 2fr; /* Chart gets 75%, insight gets 25% */
+  grid-template-columns: 3fr 2fr;
+  /* Chart gets 75%, insight gets 25% */
   gap: 20px;
   margin-top: 20px;
 }
@@ -117,7 +118,7 @@
 
 .insight-container {
   grid-column: span 1;
-  background: #fff;
+  background: #fde3c5;
   padding: 20px;
   border-radius: 16px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);

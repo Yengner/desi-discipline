@@ -18,7 +18,7 @@ export default function LandingPage() {
           </Link>
         </div>
 
-        <div className="signup-text">
+        <div className="signup-text" style={{ fontFamily: "'Pixelify Sans', sans-serif" }}>
         <strong>Study or mummy’s coming for you 👀</strong>
         </div>
       </div>

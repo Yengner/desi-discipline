@@ -61,10 +61,12 @@ export default function StudyChart({ stats }) {
     scales: {
       x: {
         grid: { display: false },
+        border: { display: true, color: "#d8063e", width: 3 },
         ticks: { color: "#d8063e", font: { weight: "bold" } },
       },
       y: {
         grid: { display: false },
+        border: { display: true, color: "#d8063e", width: 3 },
         ticks: {
           color: "#d8063e",
           font: { weight: "bold" },

@@ -31,7 +31,6 @@ const badSites = [
 
 let lastCheckedUrl = '';
 
-<<<<<<< HEAD
 // setInterval(() => {
 //     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
 //         if (tabs[0] && tabs[0].url) {
@@ -45,7 +44,6 @@ let lastCheckedUrl = '';
 //             }
 //     });
 // }, 1000);
-=======
 setInterval(() => {
     chrome.tabs.query({active: true, currentWindow: true}, async (tabs) => {
         if (tabs[0] && tabs[0].url) {
@@ -61,7 +59,6 @@ setInterval(() => {
             }
     });
 }, 1000);
->>>>>>> 9e9ca0f326028ce07cb165399161a17d85d4e3fd
 
 // Check when a tab is activated
 chrome.tabs.onActivated.addListener(activeInfo => {
@@ -174,7 +171,6 @@ function showAlert(status, domain) {
         });
 }
 
-<<<<<<< HEAD
 function extractTextFromHTML(html) {
     return html
       .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '') // Remove scripts
@@ -184,7 +180,6 @@ function extractTextFromHTML(html) {
       .trim();
 }
 
-=======
 // background.js
 
 // Function to retrieve stored token and call your API endpoint.
@@ -271,4 +266,3 @@ function testApiCall() {
       console.log("Focus sessions for user", userId, ":", sessions);
     });
   }
->>>>>>> 9e9ca0f326028ce07cb165399161a17d85d4e3fd

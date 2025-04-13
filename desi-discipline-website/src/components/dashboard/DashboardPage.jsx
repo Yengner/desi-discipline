@@ -7,7 +7,7 @@ import StudyChart from "../graphs/StudyChart";
 import WeeklyInsight from "../graphs/WeeklyInsights";
 
 
-export default function DashboardPage({stats, weekly_data}) {
+export default function DashboardPage({username, stats, weekly_data}) {
   return (
     <div className="dashboard">
       {/* Header with logo and title */}
@@ -21,8 +21,8 @@ export default function DashboardPage({stats, weekly_data}) {
         </div>
       </div>
       {/* Main content */}
-      <div className="welcome-message">Welcome Rocky!</div>
-      {/* Dashboard card with border */}
+      <div className="welcome-message">
+  Welcome {username ? `${username[0].toUpperCase()}${username.slice(1)}` : ""}!</div>    
       <div className="dashboard-card">
         {/* Streak info */}
         <div className="streak-container">
@@ -33,7 +33,7 @@ export default function DashboardPage({stats, weekly_data}) {
             />
           </div>
           <div className="streak-info">
-            <div className="streak-title">69 Day Streak!</div>
+            <div className="streak-title">0 Day Streak!</div>
             <div className="streak-message">
               Each day you study, one aunty becomes less nosey!
             </div>

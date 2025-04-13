@@ -1,70 +1,91 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Desi Discipline</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400&family=Bokor&display=swap"
+        rel="stylesheet">
     <style>
         body {
             width: 300px;
             padding: 10px;
-            font-family: Arial, sans-serif;
+            font-family: "PixelifySans-Regular", sans-serif;
+            background-color: #feb567;
+            color: #d8063e;
         }
+
         .status {
             padding: 10px;
             margin: 5px 0;
             border-radius: 5px;
             text-align: center;
         }
+
         .good {
             background-color: #d4edda;
             color: #155724;
         }
+
         .bad {
             background-color: #f8d7da;
             color: #721c24;
         }
+
         .maybe {
-            background-color: #fff3cd;
-            color: #856404;
+            background-color: #ff8442;
+            color: #d8063e;
         }
+
         .stats {
             margin-top: 15px;
             padding: 10px;
             border-top: 1px solid #eee;
         }
+
         button {
             width: 100%;
             padding: 8px;
             margin: 5px 0;
-            background-color: #007bff;
-            color: white;
+            background-color: #ff9496;
+            color: #d8063e;
             border: none;
-            border-radius: 4px;
+            border-radius: 56px;
             cursor: pointer;
+            box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
         }
+
         button:hover {
             background-color: #0056b3;
         }
+
         #statusButton {
             font-size: 18px;
             padding: 15px;
             margin: 10px 0;
             transition: all 0.3s ease;
         }
+
         #statusButton.good {
             background-color: #28a745;
         }
+
         #statusButton.bad {
             background-color: #dc3545;
         }
+
         #statusButton.maybe {
-            background-color: #ffc107;
+            background-color: #ff8442;
         }
     </style>
 </head>
+
 <body>
     <h2>Desi Discipline</h2>
     <button id="statusButton" class="maybe">Checking Website Status...</button>
-    <div id="statusDisplay" class="status"></div>
+    <!-- <div id="statusDisplay" class="status"></div> -->
     <button id="addGoodSite">Add Good Site</button>
     <button id="addBadSite">Add Bad Site</button>
     <button id="viewStats">View Statistics</button>
@@ -74,4 +95,5 @@
     </div>
     <script src="popup.js"></script>
 </body>
-</html> 
+
+</html>

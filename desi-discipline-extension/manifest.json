@@ -9,10 +9,16 @@
     "webNavigation",
     "activeTab"
   ],
+<<<<<<< HEAD
   "host_permissions": ["<all_urls>"],
   "externally_connectable": {
     "matches": ["https://desi-discipline.vercel.app/*"]
   },
+=======
+  "host_permissions": [
+    "<all_urls>"
+  ],
+>>>>>>> 272ee7770fe9368e84dbc76a081da4402d5b1464
   "background": {
     "service_worker": "background.js",
     "type": "module"
@@ -22,8 +28,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
     }
-  ]
-} 
+  ],
+  "icons": {
+    "128": "icon.png"
+  }
+}

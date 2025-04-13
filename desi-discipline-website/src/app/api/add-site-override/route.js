@@ -39,15 +39,16 @@ export async function POST(req) {
     .from('sites')
     .select('site_id')
     .eq('domain', domain)
+    .single();
 
-  if (fetchError || !sites || sites.length === 0) {
+  if (fetchError || !existingSite?.site_id) {
     return NextResponse.json({
       success: false,
       error: `Site '${domain}' is not in the global list. Cannot override.`
     }, { status: 404 });
   }
 
-  const siteId = sites[0].site_id;
+  const siteId = existingSite.site_id;
 
   // ✅ STEP 2: Upsert user-specific override
   const { error: overrideError } = await supabaseAdmin
@@ -61,6 +62,6 @@ export async function POST(req) {
   return NextResponse.json({ success: true });
 } catch (err) {
   console.error("💥 Unexpected error:", err);
-  return NextResponse.json({ success: false, error: 'Internal server error', err }, { status: 500 });
+  return NextResponse.json({ success: false, error: 'Internal server error' }, { status: 500 });
 }
 }

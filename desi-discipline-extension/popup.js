@@ -217,6 +217,12 @@ function startStudying() {
   }
   
   async function stopStudying() {
+
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, { action: "clearRedButton" });
+      });
+
+
     isStudying = false;
     clearInterval(studyInterval);
     chrome.storage.local.remove(['isStudying', 'studyStartTime']);

@@ -34,5 +34,12 @@
   ],
   "icons": {
     "128": "icon.png"
+  },
+  "web_accessible_resources": [
+  {
+    "resources": ["buzzer-or-wrong-answer-20582.mp3"],
+    "matches": ["<all_urls>"]
   }
+]
+
 }

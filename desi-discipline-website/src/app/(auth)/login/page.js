@@ -1,9 +1,6 @@
+import AuthForm from "@/components/AuthForm";
 
-
-export default function Login() {
-    return (
-        <div className="p-28">
-            <h1>Login</h1>
-        </div>
-    );
+export default async function Login(){
+  return <AuthForm type='login'/>
 }
+

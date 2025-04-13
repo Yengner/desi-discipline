@@ -1,7 +1,25 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { getLoggedInUser } from '@/lib/user.actions';
+import { createSupabaseClient } from '@/utils/supabase/clients/server';
 
-export default function Home() {
+const supabase = await createSupabaseClient();
+
+const loggedIn = getLoggedInUser();
+const userId = loggedIn?.id;
+
+console.log(userId || "No user logged in");
+
+const { data, error } = await supabase
+  .from("users")
+  .select("email")
+  .eq("id", userId)
+  .single();
+
+console.log(data);
+
+
+export default async function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>

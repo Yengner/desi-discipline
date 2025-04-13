@@ -122,7 +122,7 @@ function testApiCall() {
   chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
     if (message.token) {
       // Store the token in chrome.storage
-      chrome.storage.sync.set({ authToken: message.token, refreshToken: message.refresh_token }, () => {
+      chrome.storage.local.set({ authToken: message.token, refreshToken: message.refresh_token }, () => {
         console.log("Auth token stored successfully!");
         sendResponse({ status: "success" });
       });

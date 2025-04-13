@@ -16,7 +16,7 @@ export async function POST(req) {
 
   const { data: userData, error: authError } = await supabase.auth.getUser();
   if (authError || !userData?.user?.id) {
-    return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    return { success: false, error: 'Unauthorized' }
   }
 
   const userId = userData.user.id;
@@ -29,7 +29,7 @@ export async function POST(req) {
     .single();
 
   if (siteError) {
-    return NextResponse.json({ success: false, error: siteError.message }, { status: 500 });
+    return { success: false, error: siteError.message };
   }
 
   const siteId = siteRecord.site_id;
@@ -40,8 +40,8 @@ export async function POST(req) {
     .upsert([{ user_id: userId, site_id: siteId, override_type }]);
 
   if (overrideError) {
-    return NextResponse.json({ success: false, error: overrideError.message }, { status: 500 });
+    return { success: false, error: overrideError.message }
   }
 
-  return NextResponse.json({ success: true });
+  return { success: true };
 }

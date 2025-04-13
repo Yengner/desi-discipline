@@ -40,8 +40,8 @@ export default function SignUpPage() {
       <form className="signup-container" onSubmit={handleSubmit}>
         <div className="content-container-sign-up">
 
-          <div className="rectangle-1"></div>
-          <div className="desi-discipline-sign-up" style={{ fontFamily: "'Pixelify Sans', sans-serif" }}>Desi Discipline</div>
+          {/* <div className="rectangle-1"></div> */}
+          <div className="desi-discipline" style={{ fontFamily: "'Pixelify Sans', sans-serif" }}>Desi Discipline</div>
 
           <div className="email">Email:</div>
 

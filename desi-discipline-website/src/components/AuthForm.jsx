@@ -9,11 +9,9 @@ import { handleLogin, handleSignUp } from "@/lib/user.actions";
 
 
 export default function AuthForm({ type }) {
-    const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [userName, setUserName] = useState("");
-    const [loading, setLoading] = useState(false);
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -24,11 +22,6 @@ export default function AuthForm({ type }) {
                 if (errorMessage) {
                     toast.error(errorMessage);
                 } else {
-                    if (window.chrome && chrome.runtime) {
-                        chrome.runtime.sendMessage("cjadjjbeocchjlobphenhcomlipknlap", { token: access_token }, (response) => {
-                          console.log("Extension response:", response);
-                        });
-                      }
                     toast.success("Logged In!");
                     window.location.reload();
                 }

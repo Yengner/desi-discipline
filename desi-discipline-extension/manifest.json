@@ -10,8 +10,12 @@
     "activeTab"
   ],
   "host_permissions": ["<all_urls>"],
+  "externally_connectable": {
+    "matches": ["https://desi-discipline.vercel.app/*"]
+  },
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
   "action": {
     "default_popup": "popup.html"

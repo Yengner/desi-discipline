@@ -19,12 +19,12 @@ export default function AuthForm({ type }) {
         setLoading(true); // Start loading
         try {
             if (type === "login") {
-                const { errorMessage, access_token } = await handleLogin(email, password);
+                const { errorMessage, access_token, refresh_token } = await handleLogin(email, password);
                 if (errorMessage) {
                     toast.error(errorMessage);
                 } else {
                     if (window.chrome && chrome.runtime) {
-                        chrome.runtime.sendMessage("cjadjjbeocchjlobphenhcomlipknlap", { token: access_token }, response => {
+                        chrome.runtime.sendMessage("cjadjjbeocchjlobphenhcomlipknlap", { token: access_token, refresh_token: refresh_token }, response => {
                           console.log("Extension received token");
                         });
                       }

@@ -18,7 +18,8 @@ export async function handleLogin(email, password) {
           
           return {
               errorMessage: null,
-              access_token: data.session.access_token
+              access_token: data.session.access_token,
+              refresh_token: data.session.refresh_token
           }
 
     } catch (error) {

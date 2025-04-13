@@ -1,3 +1,5 @@
+import { supabase, setAuthSession } from './supabaseClient.js';
+
 // Hardcoded lists of good and bad websites
 const goodSites = [
     'canvas.com',
@@ -28,7 +30,7 @@ const badSites = [
 let lastCheckedUrl = '';
 
 setInterval(() => {
-    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+    chrome.tabs.query({active: true, currentWindow: true}, async (tabs) => {
         if (tabs[0] && tabs[0].url) {
             checkWebsite(tabs[0].url);
         }
@@ -37,6 +39,7 @@ setInterval(() => {
                 {
                     testApiCall()
                     checkWebsite(lastCheckedUrl);
+                    await fetchUserFocusSessions();
                 }
             }
     });
@@ -94,15 +97,15 @@ function testApiCall() {
       }
   
       fetch("https://desi-discipline.vercel.app/api/extension", {
-        method: "GET", // or POST if needed
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
-        //   "Authorization": `Bearer ${token}`
+          "Authorization": `Bearer ${token}`
         }
       })
         .then(res => res.json())
         .then(apiData => {
-          console.log("API response from /api/extensions:", apiData);
+          console.log("API response from /api/extension:", apiData);
         })
         .catch(err => {
           console.error("Error calling API:", err);
@@ -110,8 +113,61 @@ function testApiCall() {
     });
   }
   
-  // Optionally, you can add a listener to test the call manually via a click on your extension icon:
+  // Optionally, test the API call when the extension icon is clicked.
   chrome.action.onClicked.addListener(() => {
     testApiCall();
   });
   
+  // Listen for messages from the website to receive the auth token.
+  chrome.runtime.onMessageExternal.addListener((message, sender, sendResponse) => {
+    if (message.token) {
+      // Store the token in chrome.storage
+      chrome.storage.sync.set({ authToken: message.token, refreshToken: message.refresh_token }, () => {
+        console.log("Auth token stored successfully!");
+        sendResponse({ status: "success" });
+      });
+      // Return true to indicate an asynchronous response.
+      return true;
+    }
+  });
+
+  async function fetchUserFocusSessions() {
+    chrome.storage.local.get(["authToken", "refreshToken"], async (data) => {
+      const token = data.authToken;
+      const refreshToken = data.refreshToken;
+  
+      if (!token || !refreshToken) {
+        console.error("Missing token(s). Please log in first.");
+        return;
+      }
+  
+      // ✅ Set session (this mutates the shared supabase instance)
+      const session = await setAuthSession(token, refreshToken);
+      if (!session) {
+        console.error("Failed to set session.");
+        return;
+      }
+  
+      // ✅ Reuse shared `supabase` instance (not from setAuthSession)
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData?.user) {
+        console.error("Failed to get authenticated user:", userError);
+        return;
+      }
+  
+      const userId = userData.user.id;
+      console.log("Authenticated user ID:", userId);
+  
+      const { data: sessions, error } = await supabase
+        .from("users")
+        .select("*")
+        .eq("id", userId); // assuming 'user_id' is the foreign key
+  
+      if (error) {
+        console.error("Error fetching focus sessions:", error);
+        return;
+      }
+  
+      console.log("Focus sessions for user", userId, ":", sessions);
+    });
+  }

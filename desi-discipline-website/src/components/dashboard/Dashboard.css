@@ -1,0 +1,268 @@
+.dashboard,
+.dashboard * {
+  box-sizing: border-box;
+}
+.dashboard {
+  background: #feb567;
+  height: 1024px;
+  position: relative;
+  overflow: hidden;
+}
+.welcome-rocky {
+  color: #d8063e;
+  text-align: left;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  position: absolute;
+  left: 206px;
+  top: 145px;
+  width: 521px;
+  height: 28px;
+}
+.frame-3 {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 435px;
+  top: 475px;
+  overflow: hidden;
+}
+.rectangle-7 {
+  background: #ff8442;
+  width: 100%;
+  height: 126px;
+  position: absolute;
+  top: -10px;
+}
+.desi-discipline {
+  color: #ffffff;
+  text-align: left;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  position: absolute;
+  left: 130px;
+  top: 30px;
+  width: 541px;
+  height: 31px;
+}
+.icon-1 {
+  width: 97px;
+  height: 120px;
+  position: absolute;
+  left: 17px;
+  top: -6px;
+  object-fit: cover;
+  aspect-ratio: 97/120;
+}
+.image-1 {
+  width: 73px;
+  height: 73px;
+  position: absolute;
+  left: 1339px;
+  top: 23px;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+.rectangle-6 {
+  border-radius: 0px;
+  width: 1092px;
+  height: 642px;
+  position: absolute;
+  left: 174px;
+  top: 217px;
+  overflow: visible;
+}
+.rectangle-2 {
+  border-radius: 0px;
+  width: 1028px;
+  height: 594px;
+  position: absolute;
+  left: 206px;
+  top: 241px;
+  overflow: visible;
+}
+.weekly-insight {
+  color: #d8063e;
+  text-align: left;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  position: absolute;
+  left: 839px;
+  top: 426px;
+  width: 382px;
+  height: 28px;
+}
+.pngtree-fire-icon-symbol-simple-design-blaze-transparent-flaming-vector-png-image-46963576-removebg-preview-1 {
+  width: 121px;
+  height: 121px;
+  position: absolute;
+  left: 206px;
+  top: 241px;
+  object-fit: cover;
+  aspect-ratio: 1;
+}
+._69-day-streak {
+  color: #d8063e;
+  text-align: left;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  position: absolute;
+  left: 318px;
+  top: 262px;
+  width: 521px;
+  height: 28px;
+}
+.each-day-you-study-one-aunty-becomes-less-nosey {
+  color: #d8063e;
+  text-align: left;
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 32px;
+  font-weight: 400;
+  position: absolute;
+  left: 317px;
+  top: 316px;
+  width: 801px;
+  height: 28px;
+}
+.line-3 {
+  margin-top: -3px;
+  border-style: solid;
+  border-color: #d8063e;
+  border-width: 3px 0 0 0;
+  width: 336.17px;
+  height: 0px;
+  position: absolute;
+  left: 259px;
+  top: 418px;
+  transform-origin: 0 0;
+  transform: rotate(89.701deg) scale(1, 1);
+}
+.rectangle-8 {
+  background: #ff9496;
+  width: 43px;
+  height: 312px;
+  position: absolute;
+  left: 288px;
+  top: 440px;
+}
+.rectangle-9 {
+  background: #ff9496;
+  width: 43px;
+  height: 198px;
+  position: absolute;
+  left: 358px;
+  top: 554px;
+}
+.rectangle-10 {
+  background: #ff9496;
+  width: 42px;
+  height: 135px;
+  position: absolute;
+  left: 428px;
+  top: 619px;
+}
+.rectangle-11 {
+  background: #ff9496;
+  width: 42px;
+  height: 249px;
+  position: absolute;
+  left: 497px;
+  top: 505px;
+}
+.rectangle-12 {
+  background: #ff9496;
+  width: 42px;
+  height: 43px;
+  position: absolute;
+  left: 567px;
+  top: 711px;
+}
+.rectangle-13 {
+  background: #ff9496;
+  width: 42px;
+  height: 137px;
+  position: absolute;
+  left: 637px;
+  top: 619px;
+}
+.rectangle-14 {
+  background: #ff9496;
+  width: 43px;
+  height: 236px;
+  position: absolute;
+  left: 706px;
+  top: 520px;
+}
+.line-4 {
+  margin-top: -3px;
+  border-style: solid;
+  border-color: #d8063e;
+  border-width: 3px 0 0 0;
+  width: 519.07px;
+  height: 0px;
+  position: absolute;
+  left: 261.94px;
+  top: 754.17px;
+  transform-origin: 0 0;
+  transform: rotate(0.083deg) scale(1, 1);
+}
+.polygon-1 {
+  width: 13px;
+  height: 14px;
+  position: absolute;
+  left: 254px;
+  top: 408px;
+  overflow: visible;
+}
+.polygon-2 {
+  width: 13px;
+  height: 14px;
+  position: absolute;
+  left: 791.09px;
+  top: 748.1px;
+  transform: translate(-10.58px, 0.8px);
+  overflow: visible;
+}
+.rectangle-16 {
+  background: #ff9b9b;
+  border-radius: 24px;
+  width: 311px;
+  height: 284px;
+  position: absolute;
+  left: 839px;
+  top: 470px;
+}
+.image-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+#image-button:hover img {
+  filter: brightness(1.1);
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+
+/* Optional image styling */
+.image-button img {
+  border-radius: 8px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.image-button:hover img {
+  transform: scale(1.05); /* Slight zoom */
+  filter: brightness(1.2); /* Brighten the image */
+}
+
+.logout-wrapper {
+  position: absolute; /* or fixed if you want it always top-right */
+  top: 20px;
+  right: 20px;
+  z-index: 9999; /* Ensure it's on top */
+}

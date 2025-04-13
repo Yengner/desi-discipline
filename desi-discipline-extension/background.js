@@ -4,32 +4,32 @@ import { supabase, setAuthSession } from './supabaseClient.js';
 const apiKey = "AIzaSyDh3NUB6h470ctpwgT9bT57yeReQuigio8";
 
 //Get api to get good sites and set
-const goodSites = [
-    'canvas.com',
-    'calendar.google.com',
-    'docs.google.com',
-    'drive.google.com',
-    'classroom.google.com',
-    'github.com',
-    'stackoverflow.com',
-    'w3schools.com',
-    'leetcode.com',
-    'codecademy.com'
-];
+// const goodSites = [
+//     'canvas.com',
+//     'calendar.google.com',
+//     'docs.google.com',
+//     'drive.google.com',
+//     'classroom.google.com',
+//     'github.com',
+//     'stackoverflow.com',
+//     'w3schools.com',
+//     'leetcode.com',
+//     'codecademy.com'
+// ];
 
-//Get api to get bad sites
-const badSites = [
-    'instagram.com',
-    'netflix.com',
-    'facebook.com',
-    'twitter.com',
-    'tiktok.com',
-    'reddit.com',
-    'pinterest.com',
-    'snapchat.com',
-    'youtube.com/watch',
-    'twitch.tv'
-];
+// //Get api to get bad sites
+// const badSites = [
+//     'instagram.com',
+//     'netflix.com',
+//     'facebook.com',
+//     'twitter.com',
+//     'tiktok.com',
+//     'reddit.com',
+//     'pinterest.com',
+//     'snapchat.com',
+//     'youtube.com/watch',
+//     'twitch.tv'
+// ];
 
 let lastCheckedUrl = '';
 
@@ -46,6 +46,8 @@ let lastCheckedUrl = '';
 //             }
 //     });
 // }, 1000);
+
+
 setInterval(() => {
     chrome.tabs.query({active: true, currentWindow: true}, async (tabs) => {
         if (tabs[0] && tabs[0].url) {
@@ -57,6 +59,7 @@ setInterval(() => {
                     testApiCall()
                     checkWebsite(lastCheckedUrl);
                     await fetchUserFocusSessions();
+                    
                 }
             }
     });
@@ -254,6 +257,9 @@ function testApiCall() {
   
       const userId = userData.user.id;
       console.log("Authenticated user ID:", userId);
+
+        // Fetch the site lists
+      await fetchSiteLists(userId);
   
       const { data: sessions, error } = await supabase
         .from("users")
@@ -268,3 +274,48 @@ function testApiCall() {
       console.log("Focus sessions for user", userId, ":", sessions);
     });
   }
+
+
+  // Fetch the site lists when the extension is loaded
+  let goodSites = [];
+  let badSites = [];
+  
+  async function fetchSiteLists(userId) {
+    const { data: globalSites, error: siteError } = await supabase
+      .from("sites")
+      .select("site_id, domain, category");
+  
+    const { data: overrides, error: overrideError } = await supabase
+      .from("user_site_settings")
+      .select("site_id, override_type");
+  
+    if (siteError) {
+      console.error("Error loading global site list:", siteError);
+      return;
+    }
+  
+    if (overrideError) {
+      console.error("Error loading user overrides:", overrideError);
+      return;
+    }
+  
+    // Map overrides for quick lookup
+    const overrideMap = {};
+    overrides.forEach((o) => {
+      overrideMap[o.site_id] = o.override_type;
+    });
+  
+    // Merge global list with overrides
+    goodSites = [];
+    badSites = [];
+  
+    for (const site of globalSites) {
+      const finalType = overrideMap[site.site_id] || site.default_type;
+      if (finalType === "allowed") goodSites.push(site.domain);
+      else if (finalType === "distraction") badSites.push(site.domain);
+    }
+  
+    console.log("✅ goodSites from DB:", goodSites);
+    console.log("🚫 badSites from DB:", badSites);
+  }
+  

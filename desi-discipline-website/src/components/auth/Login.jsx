@@ -21,12 +21,11 @@ export default function LoginPage() {
       if (errorMessage) {
         toast.error(errorMessage);
       } else {
-        // Optional extension token sending
-        // if (window.chrome && chrome.runtime) {
-        //   chrome.runtime.sendMessage("your-extension-id", { token: access_token, refresh_token }, res => {
-        //     console.log("Extension received token");
-        //   });
-        // }
+        if (window.chrome && chrome.runtime) {
+          chrome.runtime.sendMessage("your-extension-id", { token: access_token, refresh_token }, res => {
+            console.log("Extension received token");
+          });
+        }
 
         toast.success("Logged In!");
         router.push("/dashboard"); // or window.location.reload();

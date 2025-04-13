@@ -19,11 +19,11 @@ console.log(userId || "No user logged in");
 
 // console.log(data);
 
-export default async function WE() {
+export default async function Dashboard() {
   return (
     <div className="p-28">
         <h1>Dashboard</h1>
-        <LogoutButton />
+        {/* <LogoutButton /> */}
     </div>
   );
 }

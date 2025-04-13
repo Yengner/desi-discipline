@@ -7,19 +7,19 @@ export default function LandingPage() {
     <div className="desktop-1">
       <div className="content-container">
         <h1 className="desi-discipline">Desi Discipline</h1>
-        <img className="decorative-image" src="/img-9478-10.png" alt="Decorative" />
+        <img className="decorative-image" src="/gifaunty.gif" alt="Decorative" />
 
         <div className="button-group">
-          <Link href="/login">
+          <Link href="/login" className="LoginLink">
             <button className="main-btn">Login</button>
           </Link>
-          <Link href="/sign-up">
+          <Link href="/sign-up" className="LoginLink">
             <button className="main-btn">Sign Up</button>
           </Link>
         </div>
 
         <div className="signup-text">
-          Stay disciplined or your mummy’s coming for you 👀
+        <strong>Study or mummy’s coming for you 👀</strong>
         </div>
       </div>
     </div>

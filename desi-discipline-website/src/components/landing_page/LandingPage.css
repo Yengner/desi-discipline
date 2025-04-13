@@ -6,11 +6,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Pixelify Sans", sans-serif;
+  font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif; 
 }
 
 .content-container {
-  background: #fff5ee;
+  background: #ffa362;
   border-radius: 16px;
   padding: 2rem;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
@@ -94,6 +94,34 @@
   font-style: italic;
   font-size: 0.9rem;
   margin-top: 0.25rem;
+}
+.main-btn {
+  background: linear-gradient(135deg, #ff1616, #ff8e6b);
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+  border: none;
+  border-radius: 30px;
+  margin: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.main-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 16px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #ff9496, #feb567);
+}
+
+.main-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.login-link {
+  font-family: 'Courier New', Courier, monospace;
 }
 
 @media (max-width: 500px) {

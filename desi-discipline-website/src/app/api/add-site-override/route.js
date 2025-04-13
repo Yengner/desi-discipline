@@ -39,16 +39,15 @@ export async function POST(req) {
     .from('sites')
     .select('site_id')
     .eq('domain', domain)
-    .single();
 
-  if (fetchError || !existingSite?.site_id) {
+  if (fetchError || !sites || sites.length === 0) {
     return NextResponse.json({
       success: false,
       error: `Site '${domain}' is not in the global list. Cannot override.`
     }, { status: 404 });
   }
 
-  const siteId = existingSite.site_id;
+  const siteId = sites[0].site_id;
 
   // ✅ STEP 2: Upsert user-specific override
   const { error: overrideError } = await supabaseAdmin

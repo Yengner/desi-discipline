@@ -3,13 +3,47 @@ let studyStartTime = null;
 let studyInterval = null;
 
 document.addEventListener('DOMContentLoaded', () => {
-      // ✅ Create timer display element under study button
+    // Check if user is logged in
+    chrome.storage.local.get(["authToken"], ({ authToken }) => {
+        if (!authToken) {
+          // 🚪 No user is logged in
+          document.getElementById("authSection").style.display = "block";
+        } else {
+          // 🔐 User is logged in
+          document.getElementById("mainApp").style.display = "block";
+          initMainApp(); // your existing logic lives here
+        }
+      });
+
+
     const studyBtn = document.getElementById('studyToggleBtn');
+
+    // Insert timer display
     const studyTimerDisplay = document.createElement('div');
     studyTimerDisplay.id = 'studyTimer';
     studyTimerDisplay.style.textAlign = 'center';
     studyTimerDisplay.style.marginTop = '5px';
     studyBtn.insertAdjacentElement('afterend', studyTimerDisplay);
+  
+    // Restore timer if session is active
+    chrome.storage.local.get(['isStudying', 'studyStartTime'], (result) => {
+      if (result.isStudying && result.studyStartTime) {
+        isStudying = true;
+        studyStartTime = new Date(result.studyStartTime);
+  
+        studyBtn.textContent = 'Stop Studying';
+        studyBtn.classList.remove('good');
+        studyBtn.classList.add('bad');
+  
+        studyInterval = setInterval(() => {
+          const elapsed = Math.floor((new Date() - studyStartTime) / 1000);
+          const minutes = Math.floor(elapsed / 60);
+          const seconds = elapsed % 60;
+          document.getElementById('studyTimer').textContent = `⏱️ Studying for ${minutes}m ${seconds}s`;
+        }, 1000);
+      }
+    });
+  
 
     // ✅ Add event listener to start/stop studying
     studyBtn.addEventListener('click', () => {
@@ -141,6 +175,13 @@ function viewStatistics() {
 function startStudying() {
     isStudying = true;
     studyStartTime = new Date();
+
+    chrome.storage.local.set({
+        isStudying: true,
+        studyStartTime: studyStartTime.toISOString()
+      });
+
+
     const studyBtn = document.getElementById('studyToggleBtn');
     studyBtn.textContent = 'Stop Studying';
     studyBtn.classList.remove('good');
@@ -157,6 +198,7 @@ function startStudying() {
   async function stopStudying() {
     isStudying = false;
     clearInterval(studyInterval);
+    chrome.storage.local.remove(['isStudying', 'studyStartTime']);
   
     const studyBtn = document.getElementById('studyToggleBtn');
     studyBtn.textContent = 'Start Studying';

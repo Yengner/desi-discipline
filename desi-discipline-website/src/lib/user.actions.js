@@ -10,16 +10,22 @@ export async function handleLogin(email, password) {
     try {
         const supabase = await createSupabaseClient();
 
-        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
         if (error) {
             throw error;
         }
-
-        return { errorMessage: null }
+          
+          return {
+              errorMessage: null,
+              access_token: data.session.access_token
+          }
 
     } catch (error) {
-        return { errorMessage: getErrorMessage(error) }
+        return {
+            errorMessage: getErrorMessage(error),
+            access_token: null
+        }
     }
 }
 

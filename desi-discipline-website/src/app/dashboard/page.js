@@ -1,3 +1,4 @@
+import LogoutButton from '@/components/LogoutButton';
 import { getLoggedInUser } from '@/lib/user.actions';
 import { createSupabaseClient } from '@/utils/supabase/clients/server';
 
@@ -20,6 +21,7 @@ export default async function WE() {
   return (
     <div className="p-28">
         <h1>Dashboard</h1>
+        <LogoutButton />
     </div>
   );
 }

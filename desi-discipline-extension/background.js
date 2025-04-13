@@ -80,3 +80,37 @@ function showAlert(status, domain) {
             console.error('Error sending message:', error);
         });
 }
+
+// background.js
+
+// Function to retrieve stored token and call your API endpoint.
+function testApiCall() {
+    chrome.storage.sync.get("authToken", (data) => {
+      const token = data.authToken;
+      if (!token) {
+        console.error("No auth token found. Please log in first.");
+        return;
+      }
+  
+      fetch("https://your-app.vercel.app/api/extensions", {
+        method: "GET", // or POST if needed
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      })
+        .then(res => res.json())
+        .then(apiData => {
+          console.log("API response from /api/extensions:", apiData);
+        })
+        .catch(err => {
+          console.error("Error calling API:", err);
+        });
+    });
+  }
+  
+  // Optionally, you can add a listener to test the call manually via a click on your extension icon:
+  chrome.action.onClicked.addListener(() => {
+    testApiCall();
+  });
+  

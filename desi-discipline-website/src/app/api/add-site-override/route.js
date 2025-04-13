@@ -41,7 +41,7 @@ export async function POST(req) {
     .eq('domain', domain)
     .single();
 
-  if (fetchError || !existingSite?.site_id) {
+  if (fetchError) {
     return NextResponse.json({
       success: false,
       error: `Site '${domain}' is not in the global list. Cannot override.`

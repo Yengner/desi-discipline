@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
+    // Setup login events
+      setupLoginEvents();
 
     const studyBtn = document.getElementById('studyToggleBtn');
 
@@ -82,25 +84,42 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+
     
 });
 
 
 // Update time display
-function updateTimeDisplay() {
-    chrome.storage.sync.get(['userData'], (result) => {
-        const userData = result.userData || { productiveTime: 0, distractedTime: 0 };
-        const productiveHours = Math.floor(userData.productiveTime / 60);
-        const productiveMinutes = userData.productiveTime % 60;
-        const distractedHours = Math.floor(userData.distractedTime / 60);
-        const distractedMinutes = userData.distractedTime % 60;
-        
-        document.getElementById('productiveTime').textContent = 
-            `${productiveHours}h ${productiveMinutes}m`;
-        document.getElementById('distractedTime').textContent = 
-            `${distractedHours}h ${distractedMinutes}m`;
-    });
-}
+async function updateTimeDisplay() {
+    const { authToken } = await new Promise(resolve =>
+      chrome.storage.local.get(["authToken"], resolve)
+    );
+  
+    if (!authToken) return;
+  
+    try {
+      const response = await fetch("https://desi-discipline.vercel.app/api/daily-summary", {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+        },
+      });
+  
+      const data = await response.json();
+  
+      if (!data || data.error) {
+        console.error("Failed to fetch daily stats:", data?.error);
+        return;
+      }
+  
+      const { productive } = data;
+  
+      const [pH, pM] = [Math.floor(productive / 60), productive % 60];
+  
+      document.getElementById("productiveTime").textContent = `${pH}h ${pM}m`;
+    } catch (err) {
+      console.error("Error fetching stats:", err);
+    }
+  }
 
 // Update status display
 function updateStatusDisplay(status) {
@@ -240,4 +259,51 @@ function startStudying() {
     }
   
     studyStartTime = null;
+  }
+
+  function setupLoginEvents() {
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupRedirectBtn");
+  
+    if (loginBtn) {
+      loginBtn.addEventListener("click", handleLogin);
+    }
+  
+    if (signupBtn) {
+      signupBtn.addEventListener("click", redirectToSignup);
+    }
+  }
+
+  async function handleLogin() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+  
+    if (!email || !password) {
+      return alert("Please enter both email and password.");
+    }
+  
+    try {
+      const response = await fetch("https://desi-discipline.vercel.app/api/extension-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+  
+      const data = await response.json();
+      if (!data.success) {
+        return alert("❌ Login failed: " + data.error);
+      }
+  
+      const { access_token, refresh_token } = data;
+      chrome.storage.local.set({ authToken: access_token, refreshToken: refresh_token }, () => {
+        location.reload(); // reload popup with new session
+      });
+    } catch (err) {
+      console.error(err);
+      alert("❌ Login failed. Please try again.");
+    }
+  }
+  
+  function redirectToSignup() {
+    chrome.tabs.create({ url: "https://desi-discipline.vercel.app/sign-up" });
   }

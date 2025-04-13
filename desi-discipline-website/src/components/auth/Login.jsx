@@ -22,7 +22,7 @@ export default function LoginPage() {
         toast.error(errorMessage);
       } else {
         if (window.chrome && chrome.runtime) {
-          chrome.runtime.sendMessage("your-extension-id", { token: access_token, refresh_token }, res => {
+          chrome.runtime.sendMessage("nlnjmjjcbokfnpapeoofkflkjgndkafc", { token: access_token, refresh_token }, res => {
             console.log("Extension received token");
           });
         }

@@ -1,8 +1,13 @@
 "use client";
+
 import React from "react";
 import LogoutButton from "../LogoutButton";
 import "./Dashboard.css";
-export default function DashboardPage() {
+import StudyChart from "../graphs/StudyChart";
+import WeeklyInsight from "../graphs/WeeklyInsights";
+
+
+export default function DashboardPage({stats, weekly_data}) {
   return (
     <div className="dashboard">
       {/* Header with logo and title */}
@@ -38,23 +43,10 @@ export default function DashboardPage() {
         <div className="chart-insight-container">
           {/* Bar chart */}
           <div className="chart-container">
-            <div className="y-axis"></div>
-            <div className="bars">
-              <div className="bar bar-1"></div>
-              <div className="bar bar-2"></div>
-              <div className="bar bar-3"></div>
-              <div className="bar bar-4"></div>
-              <div className="bar bar-5"></div>
-              <div className="bar bar-6"></div>
-              <div className="bar bar-7"></div>
-            </div>
-            <div className="x-axis"></div>
+            <StudyChart stats={stats}/>
           </div>
           {/* Weekly insight */}
-          <div className="insight-container">
-            <div className="insight-title">Weekly Insight</div>
-            <div className="insight-content"></div>
-          </div>
+          <WeeklyInsight stats={weekly_data}/>
         </div>
       </div>
     </div>

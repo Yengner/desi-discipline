@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
 .desktop-1 {
   background: #feb567;
   width: 100vw;
@@ -10,10 +12,10 @@
 }
 
 .content-container {
-  background: #fff5ee;
+  background: #fde3c5;
   border-radius: 16px;
   padding: 2rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,6 +26,7 @@
 .desi-discipline {
   font-size: 2.5rem;
   color: #d8063e;
+  font-weight: bold;
   margin-bottom: 1rem;
   text-align: center;
 }
@@ -62,10 +65,11 @@
   color: #d8063e;
   border-radius: 24px;
   padding: 0.75rem;
+  font-family: "Pixelify Sans", sans-serif;
   font-size: 1.2rem;
   cursor: pointer;
   transition: 0.2s ease-in-out;
-  box-shadow: 0 4px 4px rgba(0,0,0,0.25);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   margin-top: 0.5rem;
 }
 
@@ -95,6 +99,16 @@
   font-size: 0.9rem;
   margin-top: 0.25rem;
 }
+
+.login-form input::placeholder {
+  color: #7a1e2c;
+  /* deep pinkish red or whatever you like */
+  font-family: "Pixelify Sans", sans-serif;
+  font-size: 0.95rem;
+  opacity: 1;
+  /* makes sure it’s not faded */
+}
+
 
 @media (max-width: 500px) {
   .desi-discipline {

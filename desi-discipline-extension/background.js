@@ -108,23 +108,27 @@ function checkWebsite(url) {
                 }
             });
             return;
-        } else {
-            checkWithGemini(href).then(results => {
-                if ((results + "").toLowerCase().includes("bad")) {
-                    showAlert('bad', domain);
-                    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-                        if (tabs[0]) {
-                            chrome.tabs.sendMessage(tabs[0].id, { action: 'showBadWebsiteWarning' });
-                        }
-                    });
-                } else {
-                    showAlert('good', domain);
-                }
-            }).catch(error => {
-                console.error('Error checking with Gemini:', error);
-            });
         }
+        // } else {
+        //     checkWithGemini(href).then(results => {
+        //         if ((results + "").toLowerCase().includes("bad")) {
+        //             showAlert('bad', domain);
+        //             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        //                 if (tabs[0]) {
+        //                     chrome.tabs.sendMessage(tabs[0].id, { action: 'showBadWebsiteWarning' });
+        //                 }
+        //             });
+        //         } else {
+        //             showAlert('good', domain);
+        //         }
+        //     }).catch(error => {
+        //         console.error('Error checking with Gemini:', error);
+        //     });
+        // }
 
+        console.log("🌐 Site not in list – treating as ALLOWED:", domain);
+        showAlert("good", domain);
+        
     } catch (err) {
         console.error('Error in checkWebsite:', err);
     }

@@ -1,6 +1,6 @@
-import AuthForm from "@/components/auth/AuthForm";
+import LoginPage from "@/components/auth/Login";
 
 export default async function Login(){
-  return <AuthForm type='login'/>
+  return <LoginPage/>
 }
 

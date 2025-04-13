@@ -6,7 +6,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif; 
+  /*font-family: Rockwell,Courier Bold,Courier,Georgia,Times,Times New Roman,serif; */
+  font-family: "Pixelify Sans", sans-serif;
 }
 
 .content-container {

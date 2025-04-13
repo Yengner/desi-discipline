@@ -58,7 +58,7 @@ export default function SignUpPage() {
         </div>
 
         <div className="rectangle-1"></div>
-        <div className="desi-discipline">Desi Discipline</div>
+        <div className="desi-discipline" style={{ fontFamily: "'Pixelify Sans', sans-serif" }}>Desi Discipline</div>
 
         <div className="email">Email:</div>
         <input
